@@ -1,3 +1,6 @@
+#Rows - Reg No, Name, Aec, SL, MDC, Major, Minor 1, Minor 2,SGPA, Backlogs
+
+
 import pandas as pd
 import pdfplumber as pp
 import os
@@ -21,18 +24,25 @@ for filename in os.listdir(folder_path):
             if page_text:
                 lines=page_text.splitlines()
                 for line in lines:
-                    if line.startswith("Name:"):
-                        name=line.split("Name:")[1].strip()
-                        names.append(name)
-                    elif "Reg No" in line:
+                    if "Reg No" in line:
                         reg_no = line.split("Reg No")[-1].replace(":", "").strip(".")
                         roll_no.append(reg_no)
+
+                    elif line.startswith("Name:"):
+                        name=line.split("Name:")[1].strip()
+                        names.append(name)
+                        
                     elif line.startswith("SGPA:"):
                         sgpa = line.split("SGPA:")[-1].strip().split()[0]
                         try:
                             Sgpa.append(float(sgpa))
                         except ValueError:
                             Sgpa.append(0.0)
+
+           # tables=page.extract_tables()
+           # for table in tables:
+           #     for row in table:
+           #         print(row)
 
 
 df= pd.DataFrame({
