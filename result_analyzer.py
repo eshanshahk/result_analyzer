@@ -6,8 +6,8 @@ def get_details(no_of_students):
             Class=int(input("Enter class : "))
             students.append({'Name': Name, 'Class': Class})
 
-            
+
 students=[]
 no_of_students=int(input("Enter no of students : "))
 get_details(no_of_students)
-print(students)
+pd.DataFrame(students).to_excel('marks.xlsx',index=False)
